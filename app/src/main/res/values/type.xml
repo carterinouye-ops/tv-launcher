@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Type scale. Everything is Inter; weight is carried by fontFamily (inter_medium /
+  inter_semibold) rather than android:textStyle="bold", which would synthesize a faux-bold
+  on top of an already-weighted face and is what made the old UI look mismatched.
+-->
+<resources>
+
+    <!-- Base of the scale. Dot-named styles below (Text.Foo) implicitly inherit from this. -->
+    <style name="Text">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- Row heading. The reference sets this in sentence case at reading size, not as a
+         tracked micro-caps label. -->
+    <style name="Text.SectionLabel">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:letterSpacing">0.15</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/text_label</item>
+    </style>
+
+    <!-- Eyebrow inside the hero card ("NOW PLAYING"): small caps, wide tracking -->
+    <style name="Text.HeroEyebrow">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:letterSpacing">0.18</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/text_label</item>
+    </style>
+
+    <style name="Text.HeroTitle">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <!-- "2024 · Sci-Fi · 2h 46m" line under the hero title -->
+    <style name="Text.HeroMeta">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="Text.HeroSubtitle">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:lineSpacingMultiplier">1.25</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="Text.PillLabel">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.ButtonPrimary">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FF07102B</item>
+    </style>
+
+    <style name="Text.ButtonSecondary" parent="Text.ButtonPrimary">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.CardTitle">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.CardSubtitle">
+        <item name="android:fontFamily">@font/inter_regular</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="Text.Clock">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.TileLabel">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+
+    <!-- Segmented nav labels -->
+    <style name="Text.NavSegment">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
+    <!-- Greeting block -->
+
+
+
+
+    <style name="Text.DockLabel">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#E6FFFFFF</item>
+        <item name="android:shadowColor">#99000000</item>
+        <item name="android:shadowRadius">10</item>
+    </style>
+
+    <style name="Text.ClockDate">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="Text.ClockTime">
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">64sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+
+    <style name="Text.SpotlightBadge">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <style name="Text.SpotlightTitle">
+        <item name="android:fontFamily">@font/inter_bold</item>
+        <item name="android:textSize">27sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+
+    <style name="Text.SpotlightSub">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="Text.SpotlightButton">
+        <item name="android:fontFamily">@font/inter_semibold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+</resources>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Apple-TV style home: a full-bleed rotating photo wallpaper, a greeting block on the left,
+  a sliding segmented nav centred at the top, and a single frosted dock holding the app
+  tiles along the bottom.
+
+  Layer order, back to front: wallpaper pair (crossfaded), colour tint pulled from the
+  photo, legibility scrim, then content.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:layoutDirection="ltr">
+
+    <!--
+      The wallpaper and (shortly) the glass are drawn here on the GPU. A SurfaceView sits
+      behind the window by default, so every ordinary view still composites on top of it.
+    -->
+    <android.opengl.GLSurfaceView
+        android:id="@+id/gl_glass"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/wallpaper_b"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:scaleType="centerCrop"
+        android:importantForAccessibility="no" />
+
+    <ImageView
+        android:id="@+id/wallpaper_a"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:scaleType="centerCrop"
+        android:importantForAccessibility="no" />
+
+    <!-- Dominant colour of the current wallpaper, washed back over it -->
+    <View
+        android:id="@+id/wallpaper_tint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAccessibility="no" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/wallpaper_scrim"
+        android:importantForAccessibility="no" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/screen_side_margin"
+        android:paddingEnd="@dimen/screen_side_margin"
+        android:paddingTop="30dp"
+        android:paddingBottom="30dp">
+
+        <!-- ============ TOP BAR ============ -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+
+            <com.carter.glasslauncher.ui.view.SegmentedNav
+                android:id="@+id/nav"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:clipChildren="false" />
+
+        </RelativeLayout>
+
+        <!-- ============ CLOCK / SPOTLIGHT CARD ============ -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <!--
+              One glass card with two faces. At rest it is the compact clock; when there is
+              something to watch it morphs out to the spotlight. Its size is animated, so
+              both dimensions are explicit rather than wrap_content.
+            -->
+            <FrameLayout
+                android:id="@+id/clock_card"
+                android:layout_width="@dimen/clock_card_width"
+                android:layout_height="@dimen/clock_card_height_compact"
+                android:layout_gravity="center"
+                android:clipChildren="false">
+
+                <!--
+                  Fixed size, centred: if these tracked the card they would re-measure and
+                  re-record every frame of the morph, which cost more than everything else
+                  in the animation put together. Only the glass behind them resizes.
+                -->
+                <LinearLayout
+                    android:id="@+id/clock_content"
+                    android:layout_width="@dimen/clock_card_width"
+                    android:layout_height="@dimen/clock_card_height_compact"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <TextClock
+                        android:id="@+id/clock_time"
+                        style="@style/Text.ClockTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:scrollHorizontally="false"
+                        android:padding="8dp"
+                        android:autoSizeTextType="uniform"
+                        android:autoSizeMinTextSize="64sp"
+                        android:autoSizeMaxTextSize="300sp"
+                        android:autoSizeStepGranularity="1sp"
+                        android:format12Hour="h:mm"
+                        android:format24Hour="H:mm" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/spotlight_content"
+                    android:layout_width="@dimen/spotlight_card_width"
+                    android:layout_height="@dimen/spotlight_card_height"
+                    android:layout_gravity="center"
+                    android:alpha="0"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/spotlight_padding"
+                    android:paddingTop="@dimen/spotlight_padding"
+                    android:paddingEnd="@dimen/spotlight_padding"
+                    android:paddingBottom="@dimen/spotlight_padding"
+                    android:visibility="gone">
+
+                    <!--
+                      One inset governs the whole card: the artwork sits 16dp from the
+                      top and sides, there is 16dp between it and the page dots, and 16dp
+                      between the dots and the bottom edge. Card height is just the sum of
+                      those (16 + 192 + 16 + 9 + 16 = 249dp), so the rhythm holds without
+                      anything needing to be centred.
+
+                      clipToOutline is set in code, not here: the XML attribute only exists
+                      from API 31 and this runs on API 30, where it is silently ignored and
+                      the artwork comes out square.
+                    -->
+                    <FrameLayout
+                        android:id="@+id/spotlight_art_frame"
+                        android:layout_width="@dimen/spotlight_art_width"
+                        android:layout_height="@dimen/spotlight_art_height"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/spotlight_art_bg">
+
+                        <ImageView
+                            android:id="@+id/spotlight_art"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:importantForAccessibility="no" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="20dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|start"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/spotlight_badge"
+                            style="@style/Text.SpotlightBadge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/spotlight_badge_bg"
+                            android:drawablePadding="7dp"
+                            android:gravity="center"
+                            android:paddingStart="11dp"
+                            android:paddingTop="5dp"
+                            android:paddingEnd="13dp"
+                            android:paddingBottom="5dp" />
+
+                        <TextView
+                            android:id="@+id/spotlight_title"
+                            style="@style/Text.SpotlightTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="9dp"
+                            android:ellipsize="end"
+                            android:maxLines="1" />
+
+                        <TextView
+                            android:id="@+id/spotlight_subtitle"
+                            style="@style/Text.SpotlightSub"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:ellipsize="end"
+                            android:maxLines="1" />
+
+                        <TextView
+                            android:id="@+id/spotlight_status"
+                            style="@style/Text.SpotlightSub"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:ellipsize="end"
+                            android:maxLines="1" />
+
+                        <ProgressBar
+                            android:id="@+id/spotlight_progress"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="6dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginEnd="10dp"
+                            android:max="1000"
+                            android:progressDrawable="@drawable/spotlight_progress"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/spotlight_button"
+                            style="@style/Text.SpotlightButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="11dp"
+                            android:background="@drawable/spotlight_button_bg"
+                            android:gravity="center"
+                            android:drawablePadding="8dp"
+                            android:drawableStart="@drawable/ic_watch_play"
+                            android:paddingStart="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="20dp"
+                            android:paddingBottom="8dp"
+                            android:text="@string/spotlight_watch_now" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </FrameLayout>
+        </FrameLayout>
+
+        <!-- ============ DOCK ============ -->
+        <TextView
+            android:id="@+id/row_title"
+            style="@style/Text.DockLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp" />
+
+        <FrameLayout
+            android:id="@+id/dock"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dock_height"
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <com.carter.glasslauncher.ui.view.PagedDockView
+                android:id="@+id/dock_row"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:paddingStart="@dimen/dock_padding"
+                android:paddingEnd="@dimen/dock_padding"
+                android:clipToPadding="true" />
+            <!--
+              clipToPadding is on so the first tile of the *next* page, which begins exactly
+              at the content edge, is not drawn as a sliver inside the dock's padding.
+            -->
+        </FrameLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,27 @@
+# Machine-local config; holds the SDK path and the TMDB API key.
+local.properties
+
+# Build output
+build/
+app/build/
+.gradle/
+
+# IDE
+.idea/
+*.iml
+
+.DS_Store
+
+# Signing and local credentials
+*.jks
+*.keystore
+key.properties
+.env
+.env.*
+!.env.example
+
+# Local design references and development captures (not app resources)
+/design/
+/A64711F3-D010-4EA8-9DE6-7536EADE33B1.PNG
+/Gold-Gate-wallpaper.png.webp
+/local.properties.example.tmp

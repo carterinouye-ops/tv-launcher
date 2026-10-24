@@ -1,0 +1,5 @@
+# Copy to local.properties and point this to your Android SDK installation.
+sdk.dir=/path/to/Android/sdk
+
+# Optional: your own TMDB API key. Leave blank to build without artwork enrichment.
+tmdb.api.key=

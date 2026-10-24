@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Glass Launcher</string>
+    <string name="label_now_playing">Now Playing</string>
+    <string name="label_continue_watching">Continue Watching</string>
+    <string name="action_play">Play</string>
+    <string name="action_more_info">More Info</string>
+    <string name="pill_inputs">Inputs</string>
+    <string name="pill_settings">Settings</string>
+    <string name="pill_wifi_connected">Wi-Fi</string>
+    <string name="pill_wifi_disconnected">No Wi-Fi</string>
+    <string name="row_apps_title">Apps</string>
+    <string name="row_continue_title">Continue Watching</string>
+    <string name="tile_fire_tv_home">Fire TV Home</string>
+    <string name="context_move_left">Move Left</string>
+    <string name="context_move_right">Move Right</string>
+    <string name="context_hide">Hide Tile</string>
+    <string name="context_unhide">Unhide All Tiles</string>
+    <string name="toast_hidden">Tile hidden. Long-press any tile and choose "Unhide All Tiles" to restore.</string>
+    <string name="hero_empty_title">Welcome back</string>
+    <string name="hero_empty_subtitle">Your shows will appear here</string>
+    <string name="cw_empty_hint">Start watching something in any app</string>
+    <string name="row_favorites_title">Favorites</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_inputs">Inputs</string>
+    <string name="nav_settings">Settings</string>
+    <string name="tile_xbox">Xbox</string>
+    <string name="hdmi_no_signal">No signal on HDMI 1</string>
+    <string name="rearrange_hint">Moving app — use \u25C0 \u25B6, then press OK to place</string>
+    <string name="episode_new">New episode · %1$s S%2$dE%3$d</string>
+    <string name="episode_soon">%1$s S%2$dE%3$d · %4$s</string>
+    <string name="spotlight_watch_now">Watch now</string>
+    <string name="spotlight_new_episode">New Episode</string>
+    <string name="spotlight_continue">Continue Watching</string>
+    <string name="spotlight_season_episode">Season %1$d • Episode %2$d</string>
+    <string name="spotlight_now_available">Now available</string>
+    <string name="spotlight_minutes_left">%1$d min left</string>
+    <string name="toast_open_failed">Unable to open that</string>
+    <string name="hdmi_no_signal_named">No signal on %1$s</string>
+</resources>
