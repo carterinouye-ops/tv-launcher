@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Every tile is exactly tile_width x tile_height, but the *item* is as tall as the dock
+  (match_parent) with the tile centred inside it. LinearLayoutManager top-aligns items of
+  their measured height, so a wrap_content item left the tiles pinned to the top of the
+  frosted strip with all the slack below them.
+
+  The glow is laid out at the *same* size as the tile and then scaled up at draw time
+  (scaleX/scaleY don't affect measurement). Giving it a genuinely larger layout size instead
+  would inflate the item's wrap_content width and shove the tiles apart, and pinning the
+  item to match_parent to compensate made RecyclerView's layout pass unreliable.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingStart="@dimen/tile_gap_half"
+    android:paddingEnd="@dimen/tile_gap_half">
+
+    <!-- Glow overflow is tuned so its top edge clears the hero card by the required
+         48dp: overflow = (scaleY-1)/2 * tile_height = 30dp, and the tile sits 78dp down. -->
+    <ImageView
+        android:id="@+id/tile_glow"
+        android:layout_width="@dimen/tile_width"
+        android:layout_height="@dimen/tile_height"
+        android:layout_gravity="center"
+        android:alpha="0"
+        android:scaleType="fitXY"
+        android:scaleX="1.14"
+        android:scaleY="1.26"
+        android:importantForAccessibility="no" />
+
+    <FrameLayout
+        android:id="@+id/tile_root"
+        android:layout_width="@dimen/tile_width"
+        android:layout_height="@dimen/tile_height"
+        android:layout_gravity="center"
+        android:clipToOutline="true"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/tile_banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no" />
+
+        <!-- Glossy sheen across the top of the tile -->
+        <View
+            android:id="@+id/tile_sheen"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tile_sheen_height"
+            android:layout_gravity="top"
+            android:visibility="gone"
+            android:importantForAccessibility="no" />
+
+        <!-- Stroke-only overlay so the lit brand rim sits above a full-bleed banner
+             instead of being painted over by it. -->
+        <View
+            android:id="@+id/tile_border"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:importantForAccessibility="no" />
+
+        <LinearLayout
+            android:id="@+id/tile_fallback"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/tile_icon"
+                android:layout_width="@dimen/tile_fallback_icon"
+                android:layout_height="@dimen/tile_fallback_icon"
+                android:importantForAccessibility="no" />
+
+            <TextView
+                android:id="@+id/tile_label"
+                style="@style/Text.TileLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1" />
+        </LinearLayout>
+    </FrameLayout>
+</FrameLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+
+    <!-- Dark base. Light comes from a few concentrated, saturated glows rather than from
+         lifting the whole canvas, with a vignette pulling the edges back down. -->
+    <color name="base_bg">#FF050A1F</color>
+    <color name="blob_blue">#FF2B6BFF</color>
+    <color name="blob_violet">#FF7A3CFF</color>
+    <color name="blob_cyan">#FF18C8FF</color>
+
+    <!-- Glass: thinner and darker than before (white ~7%) so the colour behind reads
+         through the panel instead of being washed out by it. -->
+    <color name="glass_fill">#12FFFFFF</color>
+    <color name="glass_scrim">#38050A1F</color>
+    <color name="glass_border_bright">#4DFFFFFF</color>
+    <color name="glass_border_dim">#0AFFFFFF</color>
+    <color name="glass_top_highlight">#2EFFFFFF</color>
+
+    <color name="text_primary">#FFFFFFFF</color>
+    <color name="text_secondary">#B8FFFFFF</color>
+    <color name="text_tertiary">#80FFFFFF</color>
+    <color name="text_label">#99FFFFFF</color>
+
+    <color name="accent_green">#FF4CD964</color>
+    <color name="progress_track">#33FFFFFF</color>
+    <color name="shimmer_base">#14FFFFFF</color>
+</resources>

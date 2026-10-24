@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Screen is 1920x1080 at density 2.0 -> a 960x540dp canvas.
+
+  ONE shared horizontal margin governs everything: the hero card, both row keylines, the
+  section labels and the continue-watching row. Tile width is not a literal here — it is
+  derived at runtime by RowMetrics so exactly four tiles plus three gaps span the distance
+  between the margins:
+
+      tileWidth = (screenWidth - 2*margin - 3*gap) / 4
+                = (960 - 192 - 84) / 4 = 171dp,  height 16:9 = 96dp
+
+  which puts the first tile's left edge on the margin and the last tile's right edge on the
+  mirrored margin.
+-->
+<resources>
+    <!-- The single horizontal margin. Everything starts here. -->
+    <dimen name="screen_side_margin">56dp</dimen>
+    <!-- Aliases so the hero and the grid keyline can never drift apart from it. -->
+    <dimen name="hero_side_margin">@dimen/screen_side_margin</dimen>
+    <dimen name="row_keyline">@dimen/screen_side_margin</dimen>
+
+    <!-- Gap between tiles; each item carries half of it on either side. -->
+    <dimen name="row_gap">14dp</dimen>
+    <dimen name="tile_gap_half">7dp</dimen>
+    <dimen name="cw_gap_half">14dp</dimen>
+
+    <!-- Fallback sizes only; RowMetrics overrides these at bind time. -->
+    <dimen name="tile_width">171dp</dimen>
+    <dimen name="tile_height">96dp</dimen>
+    <dimen name="tile_corner">28dp</dimen>
+    <dimen name="tile_fallback_icon">44dp</dimen>
+    <dimen name="tile_sheen_height">38dp</dimen>
+
+    <dimen name="cw_card_width">171dp</dimen>
+    <dimen name="cw_card_height">78dp</dimen>
+    <dimen name="cw_thumb_width">70dp</dimen>
+    <dimen name="cw_corner">18dp</dimen>
+
+    <dimen name="row_fading_edge">80dp</dimen>
+
+    <!-- Fixed vertical rhythm; the requested 48dp/40dp gaps and the two labels cost 146dp. -->
+    <dimen name="hero_height">142dp</dimen>
+    <dimen name="apps_row_height">104dp</dimen>
+    <dimen name="cw_row_height">88dp</dimen>
+    <dimen name="row_gap_large">48dp</dimen>
+    <dimen name="row_gap_medium">40dp</dimen>
+    <dimen name="label_gap">16dp</dimen>
+
+    <!-- Dock: one frosted strip holding the tiles, 5 across. -->
+    <dimen name="dock_height">108dp</dimen>
+    <dimen name="dock_padding">14dp</dimen>
+    <dimen name="dock_corner">30dp</dimen>
+
+    <dimen name="hero_corner">28dp</dimen>
+    <dimen name="pill_corner">22dp</dimen>
+    <dimen name="clock_card_width">568dp</dimen>
+    <dimen name="clock_card_height">142dp</dimen>
+    <dimen name="clock_card_corner">30dp</dimen>
+    <dimen name="clock_card_padding">22dp</dimen>
+    <dimen name="clock_card_height_compact">328dp</dimen>
+    <dimen name="spotlight_card_width">620dp</dimen>
+    <dimen name="spotlight_card_height">224dp</dimen>
+    <dimen name="spotlight_art_width">341dp</dimen>
+    <dimen name="spotlight_art_height">192dp</dimen>
+    <dimen name="spotlight_art_corner">@dimen/clock_card_corner</dimen>
+    <dimen name="spotlight_padding">16dp</dimen>
+    <dimen name="card_dots_strip">22dp</dimen>
+    <dimen name="page_dot_size">9dp</dimen>
+    <dimen name="page_dot_gap">7dp</dimen>
+    <dimen name="card_content_bottom">41dp</dimen>
+    <dimen name="card_dots_margin">16dp</dimen>
+</resources>
