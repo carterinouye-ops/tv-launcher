@@ -20,8 +20,8 @@ android {
         applicationId = "com.carter.glasslauncher"
         minSdk = 28
         targetSdk = 34
-        versionCode = 2
-        versionName = "1.0.0-beta.1"
+        versionCode = 3
+        versionName = "1.0.0-beta.2"
 
         buildConfigField("String", "TMDB_API_KEY", "\"$tmdbApiKey\"")
     }
