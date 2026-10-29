@@ -2,6 +2,10 @@
 
 An experimental Android TV / Fire TV launcher with refractive glass, water-like transitions, a floating app dock, and a clock that morphs into HDMI controls or Continue Watching.
 
+## Try the beta
+
+See [Releases](https://github.com/carterinouye-ops/tv-launcher/releases) for published APKs and the [beta installation guide](docs/BETA-INSTALL.md) for setup, compatibility, optional permissions, and removal. This is experimental software; development has focused on a Hisense Fire TV.
+
 ## Features
 
 - Native 1920 × 1080 glass rendering with OpenGL ES 3.0.
