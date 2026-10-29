@@ -272,10 +272,10 @@
                 android:clipChildren="false"
                 android:paddingStart="@dimen/dock_padding"
                 android:paddingEnd="@dimen/dock_padding"
-                android:clipToPadding="true" />
+                android:clipToPadding="false" />
             <!--
-              clipToPadding is on so the first tile of the *next* page, which begins exactly
-              at the content edge, is not drawn as a sliver inside the dock's padding.
+              PagedDockView clips ordinary tiles to the content edge, while allowing a
+              focused/enlarged tile into the padding so its artwork is never cut off.
             -->
         </FrameLayout>
     </LinearLayout>

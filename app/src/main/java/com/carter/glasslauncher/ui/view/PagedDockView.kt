@@ -1,6 +1,7 @@
 package com.carter.glasslauncher.ui.view
 
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.KeyEvent
 import android.view.View
@@ -166,6 +167,28 @@ class PagedDockView @JvmOverloads constructor(
                 if (view.hasFocus()) requestFocus()
             }
         })
+    }
+
+    /**
+     * RecyclerView's padding clip also cuts off the scale animation at the first and last
+     * slots. Clip ordinary tiles to the content box to hide the neighbouring page, but
+     * let the focused tile (including its return animation) draw into the dock's padding.
+     * The outer view bounds still contain the tile and its shadow inside the dock.
+     */
+    override fun drawChild(canvas: Canvas, child: View, drawingTime: Long): Boolean {
+        val tile = child.findViewById<View>(com.carter.glasslauncher.R.id.tile_root)
+        val enlarged = child.hasFocus() || (tile != null && tile.scaleX > 1f)
+        val save = canvas.save()
+        return try {
+            if (enlarged) {
+                canvas.clipRect(0, 0, width, height)
+            } else {
+                canvas.clipRect(paddingLeft, 0, width - paddingRight, height)
+            }
+            super.drawChild(canvas, child, drawingTime)
+        } finally {
+            canvas.restoreToCount(save)
+        }
     }
 
     /**
