@@ -3,7 +3,7 @@ package com.carter.glasslauncher.ui
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 
-/** A slightly larger, lifted tile casts a soft shadow; its artwork stays fully opaque. */
+/** A centered, enlarged tile casts a soft shadow; its artwork stays fully opaque. */
 object FocusScaleHelper {
     const val FOCUS_SCALE = 1.12f
     const val DURATION_MS = 200L
@@ -20,7 +20,7 @@ object FocusScaleHelper {
         target.scaleX = if (focused) FOCUS_SCALE else 1f
         target.scaleY = target.scaleX
         target.translationZ = if (focused) FOCUS_TRANSLATION_Z else 0f
-        target.translationY = if (focused) -3f * target.resources.displayMetrics.density else 0f
+        target.translationY = 0f
         target.alpha = 1f
         glow?.alpha = 0f
         border?.alpha = 0f
@@ -32,7 +32,7 @@ object FocusScaleHelper {
             val scale = if (hasFocus) FOCUS_SCALE else 1f
             // Elevation also draws above neighbours without reordering the dock's items.
             v.animate().scaleX(scale).scaleY(scale)
-                .translationY(if (hasFocus) -3f * v.resources.displayMetrics.density else 0f)
+                .translationY(0f)
                 .translationZ(if (hasFocus) FOCUS_TRANSLATION_Z else 0f)
                 .setDuration(DURATION_MS).setInterpolator(interpolator).start()
             onFocusChanged?.invoke(hasFocus)
