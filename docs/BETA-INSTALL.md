@@ -4,13 +4,13 @@ Experimental Android TV / Fire TV launcher. Developed on a Hisense Fire TV; othe
 
 ## Install
 
-Download the signed `glass-launcher-1.0.0-beta.1.apk` from the GitHub release assets. GitHub's automatically generated source ZIP is not an installable app.
+Download the signed `glass-launcher-1.0.0-beta.2.apk` from the GitHub release assets. GitHub's automatically generated source ZIP is not an installable app.
 
 With Android Platform Tools installed on your computer, enable developer options and ADB debugging on the TV. Use the TV's own address and accept its debugging prompt:
 
 ```sh
 adb connect TV_ADDRESS:5555
-adb install -r glass-launcher-1.0.0-beta.1.apk
+adb install -r glass-launcher-1.0.0-beta.2.apk
 adb shell am start -n com.carter.glasslauncher/.ui.MainActivity
 ```
 
